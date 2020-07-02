@@ -1,0 +1,15 @@
+<html>
+<head>
+<title> Bug Tracker - Create a Ticket</title>
+</head>
+<body class = 'header'>
+<h1>Create a ticket:</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Add Ticket">
+</form>
+<p><a href={%url 'home'%}><button>Home</button></a></p>
+</body>
+
+</html>

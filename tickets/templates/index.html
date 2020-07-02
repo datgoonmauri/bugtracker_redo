@@ -1,0 +1,50 @@
+
+<html>
+<h1>Home</h1>
+<body>
+
+{% if user.is_authenticated %}
+  <h2>Hi <b><u><a href= {%url 'user_detail' user.id%}>{{ user.username }}</a></b></h2></u>
+
+| <a href = {% url 'signup'%}> <button>Create New Account</button></a> |
+<a href = {% url 'create_ticket' user_id=user.id%}><button>Create Ticket</button></a> |
+<a href="{% url 'logout' %}"><button>logout</button></a> |
+<br>
+<h3>New Tickets:</h3>
+{%for ticket in ticket_data%}
+{% if ticket.ticket_status == "NEW"%}
+      <p>Title: <a href = {% url 'ticket_detail' id=ticket.id%}>{{ticket.title}}</a>|
+      | Filed by: <a href = {%url 'user_detail' user.id%}>{{ticket.filed_user}}</a> --
+      Status: {{ticket.ticket_status}} </p>
+    {%endif%}
+{% endfor %}
+<br>
+<h3> In Progress Tickets:</h3>
+{%for ticket in ticket_data%}
+{% if ticket.ticket_status == "IN PROGRESS"%}
+      <p>Title: <a href = {% url 'ticket_detail' id=ticket.id%}>{{ticket.title}}</a>|
+      | Filed by: <a href = {%url 'user_detail' user.id%}>{{ticket.filed_user}}</a> --
+      Status: {{ticket.ticket_status}} </p>
+    {%endif%}
+{% endfor %}
+<br>
+<h3>Completed Tickets:</h3>
+{%for ticket in ticket_data%}
+{% if ticket.ticket_status == "DONE"%}
+      <p>Title: <a href = {% url 'ticket_detail' id=ticket.id%}>{{ticket.title}}</a>|
+      | Filed by: <a href = {%url 'user_detail' user.id%}>{{ticket.filed_user}}</a> -- Status: {{ticket.ticket_status}} </p>
+    {%endif%}
+{% endfor %}
+<br>
+<h3>Invalid Tickets:</h3>
+{%for ticket in ticket_data%}
+{% if ticket.ticket_status == "INVALID"%}
+      <p>Title: <a href = {% url 'ticket_detail' id=ticket.id%}>{{ticket.title}}</a>|
+      | Filed by: <a href = {%url 'user_detail' user.id%}>{{ticket.filed_user}}</a> -- Status: {{ticket.ticket_status}} </p>
+    {%endif%}
+{% endfor %}
+
+
+{% endif %}
+</body>
+</html>
